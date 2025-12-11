@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Register - Ogani{% endblock %}
+
+{% block body %}
+    <!-- Register Section Begin -->
+    <div class="auth-section">
+        <div class="container">
+            <div class="register-form">
+                <div class="auth-container">
+                    <h2 class="auth-title">Create Account</h2>
+                    <p class="auth-subtitle">Join us and start shopping today</p>
+
+                    <!-- Django Messages -->
+                    {% if messages %}
+                    <div class="auth-messages">
+                        {% for message in messages %}
+                        <div class="auth-message {% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% endif %}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form action="/register/" method="post">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="auth-form-group">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" id="fname" name="fname" placeholder="Enter your first name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="auth-form-group">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" id="lname" name="lname" placeholder="Enter your last name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="auth-form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                        </div>
+
+                        <div class="auth-form-group">
+                            <label for="uname">User Name</label>
+                            <input type="text" id="uname" name="uname" placeholder="Choose a username" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="auth-form-group password-group">
+                                    <label for="pwd1">Password</label>
+                                    <input type="password" id="pwd1" name="pass1" placeholder="Create a password" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="auth-form-group password-group">
+                                    <label for="pwd2">Confirm Password</label>
+                                    <input type="password" id="pwd2" name="pass2" placeholder="Confirm your password" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="auth-btn">Create Account</button>
+                    </form>
+
+                    <!-- Extra Links -->
+                    <div class="auth-links">
+                        <a href="/login/" class="auth-link">Already have an account? Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Register Section End -->
+{% endblock body %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}          

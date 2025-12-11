@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - Ogani{% endblock %}
+
+{% block body %}
+    <!-- Login Section Begin -->
+    <div class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <h2 class="auth-title">Welcome Back</h2>
+                <p class="auth-subtitle">Login to your account to continue shopping</p>
+
+                <!-- Django Messages -->
+                {% if messages %}
+                <div class="auth-messages">
+                    {% for message in messages %}
+                    <div class="auth-message {% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% endif %}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form action="/login/" method="post">
+                    {% csrf_token %}
+
+                    <div class="auth-form-group">
+                        <label for="uname">User Name</label>
+                        <input type="text" id="uname" name="username" placeholder="Enter your username" required>
+                    </div>
+
+                    <div class="auth-form-group password-group">
+                        <label for="pwd">Password</label>
+                        <input type="password" id="pwd" name="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="auth-btn">Login</button>
+                </form>
+
+                <!-- Extra Links -->
+                <div class="auth-links">
+                    <a href="/register/" class="auth-link">Create an Account</a>
+                    <a href="/forgot-password/" class="auth-link forgot-password">Forgot Password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Section End -->
+
+{% endblock body %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
